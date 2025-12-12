@@ -4,7 +4,6 @@ library(ggplot2)
 library(gridExtra)
 
 # 1. Load Data
-# (Assuming the file is in the working directory or Downloads)
 # We use check.names=FALSE to see original names, but we will rename them immediately for ease
 if(file.exists("6 class csv (1).csv")) {
   stars <- read.csv("6 class csv (1).csv")
@@ -29,7 +28,6 @@ stars_clean$temp_cat <- ifelse(stars_clean$Temp > median_temp, "High Temp (Hot)"
 # 3. Visualization
 
 # A. Main Scatter Plot (The HR Diagram)
-# Note: In Astrophysics, HR Diagrams usually invert the axes. 
 # I added scale_x_reverse and scale_y_reverse to make it scientifically correct for stars.
 plot_scatter <- ggplot(stars_clean, aes(x = Temp, y = AbsMag)) +
   geom_point(alpha = 0.6, color = "blue") +
@@ -58,7 +56,7 @@ plot_hist_mag <- ggplot(stars_clean, aes(x = AbsMag)) +
        x = "Absolute Magnitude", y = "Density") + 
   theme_minimal()
 
-# (Temp Histogram)
+# Temp Histogram plot
 plot_hist_temp <- ggplot(stars_clean, aes(x = Temp)) +
   geom_histogram(fill = "orange", bins = 30, color = "white") +
   labs(title = "Temperature Distribution", x = "Temperature (K)") + 
@@ -103,3 +101,4 @@ interpret_pearson <- function(test_obj, label){
 }
 
 interpret_pearson(test_result, "Temp vs AbsMag")
+
